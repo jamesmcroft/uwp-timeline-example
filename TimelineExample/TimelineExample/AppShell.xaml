@@ -1,0 +1,94 @@
+﻿<Page
+    x:Class="TimelineExample.AppShell"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="using:TimelineExample.ViewModels"
+    mc:Ignorable="d">
+
+    <NavigationView
+        x:Name="NavView"
+        AutomationProperties.Name="Home Navigation Button"
+        Canvas.ZIndex="0"
+        IsBackButtonVisible="Collapsed"
+        IsSettingsVisible="False"
+        ItemInvoked="OnNavigationViewItemInvoked"
+        Loaded="OnNavigationViewLoaded"
+        SelectionChanged="OnNavigationViewSelectionChanged">
+
+        <NavigationView.MenuItems>
+            <NavigationViewItem
+                x:Uid="HomeNavigation"
+                AutomationProperties.AutomationId="HomeNavigationButton"
+                AutomationProperties.Name="Home Navigation Button"
+                Content="Home"
+                Icon="Home"
+                Tag="home"
+                ToolTipService.ToolTip="Navigate to home" />
+            <NavigationViewItem
+                x:Uid="EditorNavigation"
+                AutomationProperties.AutomationId="EditorNavigationButton"
+                AutomationProperties.Name="Editor Navigation Button"
+                Content="Editor"
+                Icon="Edit"
+                Tag="editor"
+                ToolTipService.ToolTip="Navigate to editor" />
+        </NavigationView.MenuItems>
+
+        <NavigationView.HeaderTemplate>
+            <DataTemplate x:DataType="viewModels:AppShellViewModel">
+                <Grid Margin="24,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        FontFamily="Segoe UI"
+                        FontSize="28"
+                        Style="{StaticResource TitleTextBlockStyle}"
+                        Text="MyText" />
+                    <CommandBar
+                        Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Background="{ThemeResource SystemControlBackgroundAltHighBrush}"
+                        DefaultLabelPosition="Right">
+                        <AppBarButton
+                            AutomationProperties.AutomationId="AddNewMyTextItemButton"
+                            AutomationProperties.Name="Add New MyText Item Button"
+                            Command="{x:Bind CreateNewItemCommand}"
+                            Icon="Add"
+                            Label="New"
+                            ToolTipService.ToolTip="Add new MyText item" />
+                        <AppBarButton
+                            AutomationProperties.AutomationId="RefreshMyTextItemListButton"
+                            AutomationProperties.Name="Refresh MyText Item List Button"
+                            Command="{x:Bind RefreshItemsCommand}"
+                            Icon="Refresh"
+                            Label="Refresh"
+                            ToolTipService.ToolTip="Refresh MyText items"
+                            Visibility="{x:Bind IsRefreshItemsVisible, Mode=OneWay}" />
+                        <AppBarButton
+                            AutomationProperties.AutomationId="SaveMyTextItemButton"
+                            AutomationProperties.Name="Save MyText Item Button"
+                            Command="{x:Bind SaveItemCommand}"
+                            Icon="Save"
+                            Label="Save"
+                            ToolTipService.ToolTip="Save current MyText item"
+                            Visibility="{x:Bind IsSaveItemVisible, Mode=OneWay}" />
+                    </CommandBar>
+                </Grid>
+            </DataTemplate>
+        </NavigationView.HeaderTemplate>
+
+        <Frame x:Name="ContentFrame" Margin="24">
+            <Frame.ContentTransitions>
+                <TransitionCollection>
+                    <NavigationThemeTransition />
+                </TransitionCollection>
+            </Frame.ContentTransitions>
+        </Frame>
+    </NavigationView>
+</Page>

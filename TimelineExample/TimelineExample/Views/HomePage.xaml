@@ -1,0 +1,64 @@
+﻿<Page
+    x:Class="TimelineExample.Views.HomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:data="using:TimelineExample.Services.Data"
+    xmlns:local="using:TimelineExample.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <DataTemplate x:Key="MyTextItemTemplate" x:DataType="data:MyTextItem">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="6" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Rectangle
+                    Grid.Column="0"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Fill="LightBlue" />
+
+                <StackPanel Grid.Column="1" Padding="10">
+                    <TextBlock
+                        Margin="0,0,0,5"
+                        FontFamily="Segoe UI"
+                        FontSize="20"
+                        MaxLines="2"
+                        Style="{StaticResource SubtitleTextBlockStyle}"
+                        Text="{x:Bind Content}" />
+
+                    <TextBlock
+                        MaxLines="1"
+                        Style="{StaticResource CaptionTextBlockStyle}"
+                        Text="{x:Bind LastModified}" />
+                </StackPanel>
+
+            </Grid>
+        </DataTemplate>
+
+        <Style x:Key="ListItemContainerStyle" TargetType="SelectorItem">
+            <Setter Property="Margin" Value="0,0,0,5" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
+    </Page.Resources>
+
+    <Grid Padding="10,0" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <TextBlock
+            FontFamily="Segoe UI"
+            FontSize="20"
+            Style="{StaticResource TitleTextBlockStyle}"
+            Text="No recent activity"
+            Visibility="{x:Bind ViewModel.HasNoItems, Mode=OneWay}" />
+
+        <ListView
+            IsItemClickEnabled="True"
+            ItemClick="OnListItemClicked"
+            ItemContainerStyle="{StaticResource ListItemContainerStyle}"
+            ItemTemplate="{StaticResource MyTextItemTemplate}"
+            ItemsSource="{x:Bind ViewModel.Items}" />
+    </Grid>
+</Page>

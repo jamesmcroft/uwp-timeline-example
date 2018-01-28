@@ -1,0 +1,14 @@
+﻿<Application
+    x:Class="TimelineExample.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TimelineExample"
+    RequestedTheme="Light">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <local:AppServiceLocator x:Key="AppServiceLocator" />
+        </ResourceDictionary>
+    </Application.Resources>
+
+</Application>

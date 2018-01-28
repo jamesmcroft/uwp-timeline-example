@@ -1,0 +1,17 @@
+﻿<Page
+    x:Class="TimelineExample.Views.EditorPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:TimelineExample.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <TextBox
+            AcceptsReturn="True"
+            PlaceholderText="Type here..."
+            Text="{x:Bind ViewModel.Content, Mode=TwoWay}"
+            TextChanged="OnTextChanged" />
+    </Grid>
+</Page>
